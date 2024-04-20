@@ -314,6 +314,39 @@ println(evens) // 출력: [2, 4]
 Kotlin의 리스트는 컬렉션 프레임워크의 일부로서, 데이터를 관리하고 처리하는 데 있어 매우 유용한 도구입니다. 불변성과 가변성을 적절히 사용함으로써, 애플리케이션의 안정성과 유지보수성을 향상시킬 수 있습니다.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DividerItemDecoration은 Android에서 RecyclerView에 항목 간의 구분선을 추가하는 데 사용되는 클래스입니다. RecyclerView의 항목들 사이에 간격을 두거나 시각적 구분을 위해 사용됩니다. RecyclerView.ItemDecoration 클래스를 상속받아 구현되며, 리스트나 그리드에서 항목들을 구분하는 데 유용합니다.
+
+기본적으로 DividerItemDecoration은 수직 또는 수평 리스트 레이아웃에 맞는 간단한 선형 구분선을 제공합니다. 사용자는 Drawable 리소스를 사용하여 구분선의 스타일을 커스터마이즈할 수 있습니다.
+
+사용 방법은 다음과 같습니다:
+
+DividerItemDecoration 인스턴스를 생성합니다. 생성자에는 컨텍스트와 방향성(수직 또는 수평)을 지정합니다.
+
+필요한 경우, setDrawable() 메소드를 사용하여 구분선의 모양을 설정할 수 있습니다. 기본 구분선 대신 사용자 지정 Drawable을 설정할 수 있습니다.
+
+마지막으로, 생성한 DividerItemDecoration 객체를 RecyclerView의 addItemDecoration() 메소드를 통해 추가합니다.
+
+예제 코드:
+
+kotlin
+
+
+val recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view)
+
+// 리사이클러뷰에 레이아웃 매니저 설정
+recyclerView.layoutManager = LinearLayoutManager(this)
+
+// DividerItemDecoration 인스턴스 생성
+val dividerItemDecoration = DividerItemDecoration(recyclerView.context, LinearLayoutManager.VERTICAL)
+
+// (선택사항) 사용자 지정 구분선 drawable 설정
+// val drawable = ContextCompat.getDrawable(context, R.drawable.my_custom_divider)
+// dividerItemDecoration.setDrawable(drawable!!)
+
+// 리사이클러뷰에 DividerItemDecoration 추가
+recyclerView.addItemDecoration(dividerItemDecoration)
+이 코드는 수직 LinearLayoutManager를 사용하는 RecyclerView에 기본 수직 구분선을 추가하는 방법을 보여줍니다. DividerItemDecoration은 간단하게 리스트의 항목들 사이에 구분선을 추가하여 UI를 개선할 수 있는 유용한 도구입니다.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
