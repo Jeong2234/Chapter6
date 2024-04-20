@@ -590,4 +590,29 @@ val users = userDao.getAll() // 사용자 목록을 조회
 Room을 사용하면 SQLite 데이터베이스를 더 쉽게 사용하고 관리할 수 있으며, 컴파일 시간에 쿼리를 검증하여 오류를 최소화할 수 있습니다. LiveData나 RxJava와 같은 다른 라이브러리와 함께 사용하면 비동기적으로 UI를 최신 상태로 유지하는 것도 간단해집니다.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Android에서 @Parcelize 어노테이션은 Kotlin Android Extensions 플러그인의 일부로 제공되며, Kotlin에서 Android의 Parcelable 인터페이스를 간단하게 구현할 수 있게 해줍니다. Parcelable 인터페이스는 객체를 Intent나 Bundle에 담아 다른 컴포넌트로 전달할 때, 또는 프로세스 간 통신(IPC)을 할 때 객체를 마샬링(직렬화)하고 언마샬링(역직렬화)하는 메커니즘을 제공합니다. 하지만, Parcelable을 수동으로 구현하는 것은 복잡하고 오류가 발생하기 쉽습니다.
+
+@Parcelize 어노테이션을 사용하면, Kotlin 클래스에 @Parcelize를 붙이고 Parcelable 인터페이스를 구현하도록 선언하기만 하면, 컴파일러가 자동으로 Parcelable 구현을 생성해줍니다. 이로 인해 개발자는 복잡한 Parcelable 구현을 직접 작성할 필요 없이, 쉽고 빠르게 데이터를 전달할 수 있는 객체를 만들 수 있습니다.
+
+@Parcelize 사용 방법 예시:
+먼저, 프로젝트의 build.gradle 파일에 Kotlin Android Extensions 플러그인을 적용합니다.
+
+kotlin
+
+
+apply plugin: 'kotlin-android-extensions'
+@Parcelize 어노테이션을 클래스에 추가하고 Parcelable 인터페이스를 구현합니다.
+
+kotlin
+
+
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class User(val name: String, val age: Int) : Parcelable
+이를 통해, User 클래스의 인스턴스는 Intent에 추가하거나 Bundle에 넣어서 다른 Activity나 Fragment 등으로 전달할 수 있게 됩니다. @Parcelize는 코드를 간결하게 유지하면서 Android에서 객체 전달 시 필요한 Parcelable 구현을 자동으로 처리해주는 매우 유용한 기능입니다.
+
+단, Kotlin 1.4.20 이상에서는 kotlin-android-extensions 플러그인이 더 이상 권장되지 않으며, @Parcelize는 kotlin-parcelize 플러그인으로 이동되었습니다. 따라서 최신 버전을 사용하는 경우에는 kotlin-parcelize 플러그인을 사용해야 합니다.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
