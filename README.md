@@ -616,3 +616,35 @@ data class User(val name: String, val age: Int) : Parcelable
 단, Kotlin 1.4.20 이상에서는 kotlin-android-extensions 플러그인이 더 이상 권장되지 않으며, @Parcelize는 kotlin-parcelize 플러그인으로 이동되었습니다. 따라서 최신 버전을 사용하는 경우에는 kotlin-parcelize 플러그인을 사용해야 합니다.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Kotlin에서 abstract 키워드는 추상 클래스나 추상 맴버(함수 또는 프로퍼티)를 선언할 때 사용됩니다. 추상 클래스는 인스턴스화할 수 없으며, 일반적으로 상속을 위한 기본 클래스로 사용됩니다. 추상 맴버는 구현을 포함하지 않으며, 해당 클래스를 상속하는 하위 클래스에서 반드시 구현해야 합니다.
+
+추상 클래스
+추상 클래스는 abstract 키워드를 사용하여 선언됩니다.
+다른 클래스가 상속받아 사용할 수 있으나, 직접적으로 인스턴스를 생성할 수 없습니다.
+추상 클래스 내에는 추상 맴버뿐만 아니라, 일반 맴버(함수나 프로퍼티)도 포함될 수 있습니다.
+추상 맴버
+추상 맴버(함수 또는 프로퍼티) 또한 abstract 키워드를 사용하여 선언됩니다.
+추상 맴버는 구현 부분이 없습니다(즉, 몸체가 없습니다).
+모든 추상 맴버는 상속받는 하위 클래스에서 반드시 구현되어야 합니다.
+예제
+kotlin
+
+
+abstract class Animal(val name: String) {
+    abstract fun sound(): String
+
+    fun info() {
+        println("This animal is called $name and it makes a ${sound()} sound.")
+    }
+}
+
+class Dog(name: String) : Animal(name) {
+    override fun sound() = "bark"
+}
+
+fun main() {
+    // val animal = Animal("some animal") // 오류: 추상 클래스는 인스턴스화할 수 없음
+    val dog = Dog("dog")
+    dog.info() // "This animal is called dog and it makes a bark sound." 출력
+}
+위 예제에서 Animal 클래스는 추상 클래스이며, sound 함수는 추상 함수입니다. Dog 클래스는 Animal 클래스를 상속받아 sound 함수를 구현합니다. 이처럼 추상 클래스와 추상 맴버를 사용함으로써, 다형성과 클래스 설계의 유연성을 높일 수 있습니다.
